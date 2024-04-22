@@ -172,17 +172,20 @@ var create = &cobra.Command{
 			Address   string
 			YamuxPort string
 			QuicPort  string
+			MongoConnect string
 			MongoDB   string
 		}{
 			Address:   os.Getenv("ENV_HOST"),
 			YamuxPort: "4530",
 			QuicPort:  "5530",
 			MongoDB:   "consensus",
+			MongoConnect: fmt.Sprintf("mongodb://%s:%s@localhost:27017", os.Getenv("MONGO_INITDB_ROOT_USERNAME"), os.Getenv("MONGO_INITDB_ROOT_PASSWORD")),
 		}
 
 		consensusNode := defaultConsensusNode()
 		consensusNode.Yamux.ListenAddrs = append(consensusNode.Yamux.ListenAddrs, consensusAs.Address+":"+consensusAs.YamuxPort)
 		consensusNode.Quic.ListenAddrs = append(consensusNode.Quic.ListenAddrs, consensusAs.Address+":"+consensusAs.QuicPort)
+		consensusNode.Mongo.Connect = consensusAs.MongoConnect
 		consensusNode.Mongo.Database = consensusAs.MongoDB
 		consensusNode.Account = generateAccount()
 
