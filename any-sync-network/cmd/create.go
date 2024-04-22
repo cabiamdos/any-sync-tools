@@ -151,7 +151,7 @@ var create = &cobra.Command{
 			Address:      os.Getenv("ENV_HOST"),
 			YamuxPort:    "4830",
 			QuicPort:     "5830",
-			MongoConnect: "mongodb://localhost:27017",
+			MongoConnect: fmt.Sprintf("mongodb://%s:%s@localhost:27017", os.Getenv("MONGO_INITDB_ROOT_USERNAME"), os.Getenv("MONGO_INITDB_ROOT_PASSWORD")),
 			MongoDB:      "coordinator",
 		}
 
@@ -283,23 +283,36 @@ func createFileNode() {
 	fmt.Println("\nCreating file node...")
 
 	answers := struct {
-		Address      string
-		YamuxPort    string
-		QuicPort     string
-		S3Endpoint   string
-		S3Region     string
-		S3Profile    string
-		S3Bucket     string
+		Address       string
+		YamuxPort     string
+		QuicPort      string
+		S3Endpoint    string
+		S3Region      string
+		S3Profile     string
+		S3Bucket      string
+		S3IndexBucket string
+		Credentials   struct {
+			AccessKey string
+			SecretKey string
+		}
 		RedisURL     string
 		RedisCluster string
 	}{
-		Address:      os.Getenv("ENV_HOST"),
-		YamuxPort:    fileNodeYamuxPort,
-		QuicPort:     fileNodeQuicPort,
-		S3Endpoint:   "http://127.0.0.1:9000",
-		S3Region:     "eu-central-1",
-		S3Profile:    "default",
-		S3Bucket:     "any-sync-files",
+		Address:       os.Getenv("ENV_HOST"),
+		YamuxPort:     fileNodeYamuxPort,
+		QuicPort:      fileNodeQuicPort,
+		S3Endpoint:    os.Getenv("ENV_MINIO_ENDPOINT"),
+		S3Region:      "eu-central-1",
+		S3Profile:     "default",
+		S3Bucket:      os.Getenv("ENV_MINIO_BUCKET"),
+		S3IndexBucket: os.Getenv("ENV_MINIO_INDEX_BUCKET"),
+		Credentials: struct {
+			AccessKey string
+			SecretKey string
+		}{
+			AccessKey: os.Getenv("ENV_MINIO_ACCESS_KEY"),
+			SecretKey: os.Getenv("ENV_MINIO_SECRET_KEY"),
+		},
 		RedisURL:     "redis://127.0.0.1:6379/?dial_timeout=3&read_timeout=6s",
 		RedisCluster: "false",
 	}
