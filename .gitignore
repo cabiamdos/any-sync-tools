@@ -1,0 +1,5 @@
+tmp/
+/*.yml
+.DS_Store
+
+bin/
