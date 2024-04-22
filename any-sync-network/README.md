@@ -1,6 +1,9 @@
 # Any-Sync Network
 Configuration builder for Any-Sync nodes.
 
+```
+Disclairmer: this is not the official repository, this does the default config without any type of prompt
+```
 ## Installation
 You can download the binary release here: https://github.com/anyproto/any-sync-tools/releases  
 
