@@ -148,7 +148,7 @@ var create = &cobra.Command{
 			MongoConnect string
 			MongoDB      string
 		}{
-			Address:      "127.0.0.1",
+			Address:      os.Getenv("ENV_HOST"),
 			YamuxPort:    "4830",
 			QuicPort:     "5830",
 			MongoConnect: "mongodb://localhost:27017",
@@ -174,7 +174,7 @@ var create = &cobra.Command{
 			QuicPort  string
 			MongoDB   string
 		}{
-			Address:   "127.0.0.1",
+			Address:   os.Getenv("ENV_HOST"),
 			YamuxPort: "4530",
 			QuicPort:  "5530",
 			MongoDB:   "consensus",
@@ -253,7 +253,7 @@ func createSyncNode() {
 		YamuxPort string
 		QuicPort  string
 	}{
-		Address:   "127.0.0.1",
+		Address:   os.Getenv("ENV_HOST"),
 		YamuxPort: syncNodeYamuxPort,
 		QuicPort:  syncNodeQuicPort,
 	}
@@ -293,7 +293,7 @@ func createFileNode() {
 		RedisURL     string
 		RedisCluster string
 	}{
-		Address:      "127.0.0.1",
+		Address:      os.Getenv("ENV_HOST"),
 		YamuxPort:    fileNodeYamuxPort,
 		QuicPort:     fileNodeQuicPort,
 		S3Endpoint:   "http://127.0.0.1:9000",
