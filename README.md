@@ -1,5 +1,7 @@
 # Any-Sync Tools
-
+```
+Disclairmer: this is not the official repository, this does the default config without any type of prompt
+```
 ## `any-sync-network`
 
 Configuration builder for Any-Sync nodes. 
