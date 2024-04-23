@@ -151,7 +151,7 @@ var create = &cobra.Command{
 			Address:      os.Getenv("ENV_HOST"),
 			YamuxPort:    "4830",
 			QuicPort:     "5830",
-			MongoConnect: fmt.Sprintf("mongodb://%s:%s@localhost:27017", os.Getenv("MONGO_INITDB_ROOT_USERNAME"), os.Getenv("MONGO_INITDB_ROOT_PASSWORD")),
+			MongoConnect: fmt.Sprintf("mongodb://%s:%s@%s:27017", os.Getenv("MONGO_INITDB_ROOT_USERNAME"), os.Getenv("MONGO_INITDB_ROOT_PASSWORD"), os.Getenv("ENV_HOST")),
 			MongoDB:      "coordinator",
 		}
 
@@ -179,7 +179,7 @@ var create = &cobra.Command{
 			YamuxPort: "4530",
 			QuicPort:  "5530",
 			MongoDB:   "consensus",
-			MongoConnect: fmt.Sprintf("mongodb://%s:%s@localhost:27017", os.Getenv("MONGO_INITDB_ROOT_USERNAME"), os.Getenv("MONGO_INITDB_ROOT_PASSWORD")),
+			MongoConnect: fmt.Sprintf("mongodb://%s:%s@%s:27017", os.Getenv("MONGO_INITDB_ROOT_USERNAME"), os.Getenv("MONGO_INITDB_ROOT_PASSWORD"), os.Getenv("ENV_HOST")),
 		}
 
 		consensusNode := defaultConsensusNode()
